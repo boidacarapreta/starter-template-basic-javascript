@@ -1,33 +1,24 @@
 {
   "name": "starter-template-basic-javascript",
   "version": "1.0.0",
-  "description": "Basic JavaScript project template for Phaser Editor 2D.",
-  "main": "main.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "description": "[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/PhaserEditor2D/starter-template-basic-javascript)",
+  "main": "servidor.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "editor": "phasereditor2d-launcher -project . -port 1959",
-    "editor-remote": "phasereditor2d-launcher -project . -disable-open-browser -public -port 1959"
+    "start": "node servidor.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PhaserEditor2D/starter-template-basic-javascript.git"
+    "url": "git+https://github.com/silvmarina/starter-template-basic-javascript.git"
   },
-  "keywords": [
-    "phaser",
-    "phasereditor2d",
-    "html5",
-    "video-game"
-  ],
-  "author": "Arian Fornaris <developers@phasereditor2d.com> (https://phasereditor2d.com/)",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/PhaserEditor2D/starter-template-basic-javascript/issues"
+    "url": "https://github.com/silvmarina/starter-template-basic-javascript/issues"
   },
-  "homepage": "https://github.com/PhaserEditor2D/starter-template-basic-javascript#readme",
-  "devDependencies": {
-    "phasereditor2d-launcher": "^3.31.0"
+  "homepage": "https://github.com/silvmarina/starter-template-basic-javascript#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
   }
 }
