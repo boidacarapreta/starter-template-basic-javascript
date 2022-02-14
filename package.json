@@ -1,24 +1,8 @@
 {
-  "name": "starter-template-basic-javascript",
-  "version": "1.0.0",
-  "description": "[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/PhaserEditor2D/starter-template-basic-javascript)",
-  "main": "servidor.js",
+  "name": "arc20202-servidor",
   "scripts": {
-    "start": "node servidor.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "npm install --prefix servidor",
+    "start": "npm start --prefix servidor"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/silvmarina/starter-template-basic-javascript.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/silvmarina/starter-template-basic-javascript/issues"
-  },
-  "homepage": "https://github.com/silvmarina/starter-template-basic-javascript#readme",
-  "dependencies": {
-    "express": "^4.17.2",
-    "socket.io": "^4.4.1"
-  }
+  "version": "0.1.0"
 }
