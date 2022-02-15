@@ -33,14 +33,14 @@ cena1.preload = function () {
 
   // Jogador 1
   this.load.spritesheet("player1", "./assets/player1.png", {
-    frameWidth: 16,
-    frameHeight: 16,
+    frameWidth: 32,
+    frameHeight: 32,
   });
 
   // Jogador 2
   this.load.spritesheet("player2", "./assets/player2.png", {
-    frameWidth: 16,
-    frameHeight: 16,
+    frameWidth: 32,
+    frameHeight: 32,
   });
 
   // Trilha sonora
@@ -69,11 +69,11 @@ cena1.create = function () {
   voz = this.sound.add("voz");
 
   // Personagens
-  player1 = this.physics.add.sprite(400, 300, "player1");
-  player2 = this.physics.add.sprite(300, 400, "player2");
-
+  player1 = this.physics.add.sprite(100, 100, "player1");
+  player2 = this.physics.add.sprite(200, 300, "player2");
 
   player1.body.collideWorldBounds = true;
+  player2.body.collideWorldBounds = true;
 
 
   // Animação do jogador 1: a esquerda
@@ -102,8 +102,8 @@ cena1.create = function () {
   this.anims.create({
     key: "right1",
     frames: this.anims.generateFrameNumbers("player1", {
-      start: 15,
-      end: 21,
+      start: 10,
+      end: 16,
     }),
     frameRate: 10,
     repeat: -1,
@@ -113,8 +113,8 @@ cena1.create = function () {
   this.anims.create({
     key: "right2",
     frames: this.anims.generateFrameNumbers("player2", {
-      start: 15,
-      end: 21,
+      start: 0,
+      end: 5,
     }),
     frameRate: 10,
     repeat: -1,
@@ -124,8 +124,8 @@ cena1.create = function () {
   this.anims.create({
     key: "stopped1",
     frames: this.anims.generateFrameNumbers("player1", {
-      start: 11,
-      end: 14,
+      start: 0,
+      end: 1,
     }),
     frameRate: 5,
     repeat: -1,
@@ -135,8 +135,8 @@ cena1.create = function () {
   this.anims.create({
     key: "stopped2",
     frames: this.anims.generateFrameNumbers("player2", {
-      start: 11,
-      end: 14,
+      start: 5,
+      end: 5,
     }),
     frameRate: 5,
     repeat: -1,
@@ -361,11 +361,6 @@ cena1.update = function (time, delta) {
     });
   }
 };
-
-function hitCave(player, terreno) {
-  // Ao passar pela frente da caverna, toca o efeito sonoro
-  voz.play();
-}
 
 function hitARCa(player, ARCas) {
   // Ao colidir com a parede, toca o efeito sonoro
