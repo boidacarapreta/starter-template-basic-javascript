@@ -9,6 +9,8 @@ var map;
 var tileset0;
 var terreno;
 var tileset1;
+var plataforma;
+var porta;
 var ARCas;
 var player1;
 var player2;
@@ -30,6 +32,8 @@ const audio = document.querySelector("audio");
 cena1.preload = function () {
   // Tilesets
   this.load.image("terreno", "./assets/terreno.png");
+
+  this.load.image("plataforma", "./assets/box_2x1.png");
 
   // Jogador 1
   this.load.spritesheet("player1", "./assets/player1.png", {
@@ -72,8 +76,18 @@ cena1.create = function () {
   player1 = this.physics.add.sprite(100, 100, "player1");
   player2 = this.physics.add.sprite(200, 300, "player2");
 
+  plataforma = this.physics.add.staticGroup();
+  porta = this.physics.add.staticGroup();
+
+  plataforma.create(100, 500, "plataforma")
+  porta.create(300, 300, "plataforma")
+
+  
+
   player1.body.collideWorldBounds = true;
   player2.body.collideWorldBounds = true;
+  this.physics.add.collider(player1, plataforma, null, null, this);
+  this.physics.add.collider(player1, porta, gameover, null, this);
 
 
   // Animação do jogador 1: a esquerda
@@ -201,17 +215,18 @@ cena1.create = function () {
       player1.setCollideWorldBounds(true);
 
       // Detecção de colisão: terreno
-      physics.add.collider(player1, terreno, hitCave, null, this);
+      
 
       // Detecção de colisão e disparo de evento: ARCas
-      physics.add.collider(player1, ARCas, hitARCa, null, this);
-
+      
+     /*
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
         .then((stream) => {
           midias = stream;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error)); */
+
     } else if (jogadores.segundo === self.socket.id) {
       // Define jogador como o segundo
       jogador = 2;
@@ -224,7 +239,7 @@ cena1.create = function () {
 
       // Detecção de colisão e disparo de evento: ARCas
       physics.add.collider(player2, ARCas, hitARCa, null, this);
-
+     /*
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
         .then((stream) => {
@@ -252,21 +267,12 @@ cena1.create = function () {
               );
             });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error)); */
     }
 
     // Os dois jogadores estão conectados
     console.log(jogadores);
-    if (jogadores.primeiro !== undefined && jogadores.segundo !== undefined) {
-      // Contagem regressiva em segundos (1.000 milissegundos)
-      timer = 60;
-      timedEvent = time.addEvent({
-        delay: 1000,
-        callback: countdown,
-        callbackScope: this,
-        loop: true,
-      });
-    }
+    
   });
 
   this.socket.on("offer", (socketId, description) => {
@@ -313,7 +319,7 @@ cena1.create = function () {
 };
 cena1.update = function (time, delta) {
   // Controle do personagem por direcionais
-  if (jogador === 1 && timer >= 0) {
+  if (jogador === 1 ){
     if (cursors.left.isDown) {
       player1.body.setVelocityX(-100);
       player1.anims.play("left1", true);
@@ -321,22 +327,18 @@ cena1.update = function (time, delta) {
       player1.body.setVelocityX(100);
       player1.anims.play("right1", true);
     } else {
-      player1.body.setVelocity(0);
+      player1.body.setVelocityX(0);
       player1.anims.play("stopped1", true);
     }
-    if (cursors.up.isDown) {
-      player1.body.setVelocityY(-100);
-    } else if (cursors.down.isDown) {
-      player1.body.setVelocityY(100);
-    } else {
-      player1.body.setVelocityY(0);
-    }
+    if (cursors.up.isDown && player1.body.blocked.down)  {
+      player1.body.setVelocityY(-500);
+    } 
     this.socket.emit("estadoDoJogador", {
       frame: player1.anims.currentFrame.index,
       x: player1.body.x,
       y: player1.body.y,
     });
-  } else if (jogador === 2 && timer >= 0) {
+  } else if (jogador === 2 ) {
     if (cursors.left.isDown) {
       player2.body.setVelocityX(-100);
       player2.anims.play("left2", true);
@@ -344,15 +346,11 @@ cena1.update = function (time, delta) {
       player2.body.setVelocityX(100);
       player2.anims.play("right2", true);
     } else {
-      player2.body.setVelocity(0);
+      player2.body.setVelocityX(0);
       player2.anims.play("stopped2", true);
     }
-    if (cursors.up.isDown) {
-      player2.body.setVelocityY(-100);
-    } else if (cursors.down.isDown) {
-      player2.body.setVelocityY(100);
-    } else {
-      player2.body.setVelocityY(0);
+    if (cursors.up.isDown && player2.body.blocked.down) {
+      player2.body.setVelocityY(-500);
     }
     this.socket.emit("estadoDoJogador", {
       frame: player2.anims.currentFrame.index,
@@ -362,9 +360,9 @@ cena1.update = function (time, delta) {
   }
 };
 
-function hitARCa(player, ARCas) {
-  // Ao colidir com a parede, toca o efeito sonoro
-  parede.play();
+function gameover(player, plataforma) {
+  this.scene.start(cena2)
+
 }
 
 // Exportar a cena
