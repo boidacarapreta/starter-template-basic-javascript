@@ -73,22 +73,30 @@ cena1.create = function () {
   voz = this.sound.add("voz");
 
   // Personagens
-  player1 = this.physics.add.sprite(100, 100, "player1");
-  player2 = this.physics.add.sprite(200, 300, "player2");
+  player1 = this.physics.add.sprite(90, 100, "player1");
+  player2 = this.physics.add.sprite(110, 100, "player2");
 
   plataforma = this.physics.add.staticGroup();
   porta = this.physics.add.staticGroup();
 
   plataforma.create(100, 500, "plataforma")
-  porta.create(300, 300, "plataforma")
-
-  
+  plataforma.create(200, 400, "plataforma")
+  plataforma.create(300, 300, "plataforma")
+  plataforma.create(500, 400, "plataforma")
+  plataforma.create(100, 150, "plataforma")
+  plataforma.create(250, 210, "plataforma")
+  plataforma.create(600, 450, "plataforma")
+  plataforma.create(650, 250, "plataforma")
+  porta.create(700, 150, "plataforma")
 
   player1.body.collideWorldBounds = true;
   player2.body.collideWorldBounds = true;
-  this.physics.add.collider(player1, plataforma, null, null, this);
-  this.physics.add.collider(player1, porta, gameover, null, this);
 
+  this.physics.add.collider(player1, plataforma, null, null, this);
+  this.physics.add.collider(player2, plataforma, null, null, this);
+
+  this.physics.add.collider(player1, porta, gameover, null, this);
+  this.physics.add.collider(player2, porta, gameover, null, this);
 
   // Animação do jogador 1: a esquerda
   this.anims.create({

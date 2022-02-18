@@ -6,8 +6,8 @@ import { cena2 } from "./cena2.js";
 // Configuração do jogo
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 750,
+  height: 750,
   parent: "game-container",
   physics: {
     default: "arcade",
@@ -20,8 +20,8 @@ const config = {
     mode: Phaser.Scale.FIT,
     parent: "game",
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 800,
-    height: 600,
+    width: 750,
+    height: 650,
   },
   scene: [cena0, cena1, cena2],
 };
