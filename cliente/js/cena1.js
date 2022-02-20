@@ -73,20 +73,20 @@ cena1.create = function () {
   voz = this.sound.add("voz");
 
   // Personagens
-  player1 = this.physics.add.sprite(90, 100, "player1");
-  player2 = this.physics.add.sprite(110, 100, "player2");
+  player1 = this.physics.add.sprite(100, 750, "player1");
+  player2 = this.physics.add.sprite(150, 750, "player2");
 
   plataforma = this.physics.add.staticGroup();
   porta = this.physics.add.staticGroup();
 
-  plataforma.create(100, 500, "plataforma")
-  plataforma.create(200, 400, "plataforma")
-  plataforma.create(300, 300, "plataforma")
-  plataforma.create(500, 400, "plataforma")
-  plataforma.create(100, 150, "plataforma")
-  plataforma.create(250, 210, "plataforma")
-  plataforma.create(600, 450, "plataforma")
-  plataforma.create(650, 250, "plataforma")
+  plataforma.create(300, 650, "plataforma")
+  plataforma.create(140, 565, "plataforma")
+  plataforma.create(430, 560, "plataforma")
+  plataforma.create(380, 400, "plataforma")
+  plataforma.create(30, 465, "plataforma")
+  plataforma.create(200, 430, "plataforma")
+  plataforma.create(540, 460, "plataforma")
+  plataforma.create(720, 400, "plataforma")
   porta.create(700, 150, "plataforma")
 
   player1.body.collideWorldBounds = true;
@@ -339,7 +339,7 @@ cena1.update = function (time, delta) {
       player1.anims.play("stopped1", true);
     }
     if (cursors.up.isDown && player1.body.blocked.down)  {
-      player1.body.setVelocityY(-500);
+      player1.body.setVelocityY(-330);
     } 
     this.socket.emit("estadoDoJogador", {
       frame: player1.anims.currentFrame.index,
@@ -358,7 +358,7 @@ cena1.update = function (time, delta) {
       player2.anims.play("stopped2", true);
     }
     if (cursors.up.isDown && player2.body.blocked.down) {
-      player2.body.setVelocityY(-500);
+      player2.body.setVelocityY(-330);
     }
     this.socket.emit("estadoDoJogador", {
       frame: player2.anims.currentFrame.index,
