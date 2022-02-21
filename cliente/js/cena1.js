@@ -7,6 +7,7 @@ var cena1 = new Phaser.Scene("Cena 1");
 // Variáveis locais
 var map;
 var tileset0;
+var kit;
 var terreno;
 var tileset1;
 var plataforma;
@@ -34,6 +35,8 @@ cena1.preload = function () {
   this.load.image("terreno", "./assets/terreno.png");
 
   this.load.image("plataforma", "./assets/box_2x1.png");
+
+  this.load.image("kit", "./assets/images/kitmedico.png")
 
   // Jogador 1
   this.load.spritesheet("player1", "./assets/player1.png", {
@@ -76,6 +79,9 @@ cena1.create = function () {
   player1 = this.physics.add.sprite(100, 750, "player1");
   player2 = this.physics.add.sprite(150, 750, "player2");
 
+  kit = this.physics.add.sprite(320, 630, "kit");
+
+
   plataforma = this.physics.add.staticGroup();
   porta = this.physics.add.staticGroup();
 
@@ -87,7 +93,14 @@ cena1.create = function () {
   plataforma.create(200, 430, "plataforma")
   plataforma.create(540, 460, "plataforma")
   plataforma.create(720, 400, "plataforma")
+  plataforma.create(560, 320, "plataforma")
+  plataforma.create(250, 230, "plataforma")
+  plataforma.create(100, 340, "plataforma")
+  plataforma.create(400, 160, "plataforma")
+  plataforma.create(110, 130, "plataforma")
+  plataforma.create(550, 170, "plataforma")
   porta.create(700, 150, "plataforma")
+
 
   player1.body.collideWorldBounds = true;
   player2.body.collideWorldBounds = true;
@@ -102,8 +115,8 @@ cena1.create = function () {
   this.anims.create({
     key: "left1",
     frames: this.anims.generateFrameNumbers("player1", {
-      start: 0,
-      end: 6,
+      start: 10,
+      end: 16,
     }),
     frameRate: 10,
     repeat: -1,
@@ -114,7 +127,7 @@ cena1.create = function () {
     key: "left2",
     frames: this.anims.generateFrameNumbers("player2", {
       start: 0,
-      end: 6,
+      end: 5,
     }),
     frameRate: 10,
     repeat: -1,
