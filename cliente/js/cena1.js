@@ -79,12 +79,19 @@ cena1.create = function () {
   player1 = this.physics.add.sprite(100, 750, "player1");
   player2 = this.physics.add.sprite(150, 750, "player2");
 
-  kit = this.physics.add.sprite(320, 630, "kit");
-
-
   plataforma = this.physics.add.staticGroup();
   porta = this.physics.add.staticGroup();
+  kit = this.physics.add.staticGroup();
 
+  kit.create(300, 613, "kit")
+  kit.create(140, 525, "kit")
+  kit.create(430, 523, "kit")
+  kit.create(380, 363, "kit")
+  kit.create(30, 428, "kit")
+  kit.create(200, 393, "kit")
+  kit.create(540, 423, "kit")
+  kit.create(720, 363, "kit")
+  
   plataforma.create(300, 650, "plataforma")
   plataforma.create(140, 565, "plataforma")
   plataforma.create(430, 560, "plataforma")
@@ -101,15 +108,19 @@ cena1.create = function () {
   plataforma.create(550, 170, "plataforma")
   porta.create(700, 150, "plataforma")
 
-
   player1.body.collideWorldBounds = true;
   player2.body.collideWorldBounds = true;
+
+  player1.body.setAllowGravity(false);
+  player2.body.setAllowGravity(false);
 
   this.physics.add.collider(player1, plataforma, null, null, this);
   this.physics.add.collider(player2, plataforma, null, null, this);
 
   this.physics.add.collider(player1, porta, gameover, null, this);
   this.physics.add.collider(player2, porta, gameover, null, this);
+
+  this.physics.add.overlap(player1, kit, colectKit, null, this);
 
   // Animação do jogador 1: a esquerda
   this.anims.create({
@@ -236,7 +247,7 @@ cena1.create = function () {
       player1.setCollideWorldBounds(true);
 
       // Detecção de colisão: terreno
-      
+      player1.body.setAllowGravity(true);
 
       // Detecção de colisão e disparo de evento: ARCas
       
@@ -254,12 +265,13 @@ cena1.create = function () {
 
       // Personagens colidem com os limites da cena
       player2.setCollideWorldBounds(true);
+      player2.body.setAllowGravity(true);
 
       // Detecção de colisão: terreno
-      physics.add.collider(player2, terreno, hitCave, null, this);
+      //physics.add.collider(player2, terreno, hitCave, null, this);
 
       // Detecção de colisão e disparo de evento: ARCas
-      physics.add.collider(player2, ARCas, hitARCa, null, this);
+      //physics.add.collider(player2, ARCas, hitARCa, null, this);
      /*
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
@@ -356,8 +368,8 @@ cena1.update = function (time, delta) {
     } 
     this.socket.emit("estadoDoJogador", {
       frame: player1.anims.currentFrame.index,
-      x: player1.body.x,
-      y: player1.body.y,
+      x: player1.body.x + 16,
+      y: player1.body.y + 16,
     });
   } else if (jogador === 2 ) {
     if (cursors.left.isDown) {
@@ -375,8 +387,8 @@ cena1.update = function (time, delta) {
     }
     this.socket.emit("estadoDoJogador", {
       frame: player2.anims.currentFrame.index,
-      x: player2.body.x,
-      y: player2.body.y,
+      x: player2.body.x + 16,
+      y: player2.body.y + 16,
     });
   }
 };
@@ -384,6 +396,10 @@ cena1.update = function (time, delta) {
 function gameover(player, plataforma) {
   this.scene.start(cena2)
 
+}
+
+function colectKit(player, kit){
+  kit.disableBody(true, true)
 }
 
 // Exportar a cena
