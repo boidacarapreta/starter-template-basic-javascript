@@ -8,6 +8,7 @@ var cena1 = new Phaser.Scene("Cena 1");
 var map;
 var tileset0;
 var kit;
+var door;
 var terreno;
 var tileset1;
 var plataforma;
@@ -36,7 +37,9 @@ cena1.preload = function () {
 
   this.load.image("plataforma", "./assets/box_2x1.png");
 
-  this.load.image("kit", "./assets/images/kitmedico.png")
+  this.load.image("kit", "./assets/images/kitmedico.png");
+
+  this.load.image("door", "./assets/door.png");
 
   // Jogador 1
   this.load.spritesheet("player1", "./assets/player1.png", {
@@ -82,6 +85,7 @@ cena1.create = function () {
   plataforma = this.physics.add.staticGroup();
   porta = this.physics.add.staticGroup();
   kit = this.physics.add.staticGroup();
+  door = this.physics.add.staticGroup();
 
   kit.create(300, 613, "kit")
   kit.create(140, 525, "kit")
@@ -91,7 +95,15 @@ cena1.create = function () {
   kit.create(200, 393, "kit")
   kit.create(540, 423, "kit")
   kit.create(720, 363, "kit")
-  
+  kit.create(560, 283, "kit")
+  kit.create(250, 193, "kit")
+  kit.create(100, 303, "kit")
+  kit.create(400, 123, "kit")
+  kit.create(110, 93, "kit")
+  kit.create(550, 133, "kit")
+
+  door.create(690, 78, "door")
+
   plataforma.create(300, 650, "plataforma")
   plataforma.create(140, 565, "plataforma")
   plataforma.create(430, 560, "plataforma")
@@ -106,7 +118,7 @@ cena1.create = function () {
   plataforma.create(400, 160, "plataforma")
   plataforma.create(110, 130, "plataforma")
   plataforma.create(550, 170, "plataforma")
-  porta.create(700, 150, "plataforma")
+  porta.create(690, 123, "plataforma")
 
   player1.body.collideWorldBounds = true;
   player2.body.collideWorldBounds = true;
