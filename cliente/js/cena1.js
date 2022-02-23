@@ -20,7 +20,6 @@ var parede;
 var voz;
 var cursors;
 var timedEvent;
-var timer;
 var trilha;
 var jogador;
 var ice_servers = {
@@ -133,6 +132,7 @@ cena1.create = function () {
   this.physics.add.collider(player2, porta, gameover, null, this);
 
   this.physics.add.overlap(player1, kit, colectKit, null, this);
+  this.physics.add.overlap(player2, kit, colectKit, null, this);
 
   // Animação do jogador 1: a esquerda
   this.anims.create({
