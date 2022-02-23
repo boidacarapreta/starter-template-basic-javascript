@@ -58,7 +58,7 @@ cena1.preload = function () {
 
   // Efeitos sonoros
   this.load.audio("parede", "./assets/parede.mp3");
-  this.load.audio("voz", "./assets/voz.mp3");
+ // this.load.audio("voz", "./assets/voz.mp3");
 
   // Tela cheia
   this.load.spritesheet("fullscreen", "./assets/fullscreen.png", {
@@ -76,7 +76,7 @@ cena1.create = function () {
 
   // Efeitos sonoros
   parede = this.sound.add("parede");
-  voz = this.sound.add("voz");
+ // voz = this.sound.add("voz");
 
   // Personagens
   player1 = this.physics.add.sprite(100, 750, "player1");
@@ -263,13 +263,13 @@ cena1.create = function () {
 
       // Detecção de colisão e disparo de evento: ARCas
       
-     /*
+     
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
         .then((stream) => {
           midias = stream;
         })
-        .catch((error) => console.log(error)); */
+        .catch((error) => console.log(error));
 
     } else if (jogadores.segundo === self.socket.id) {
       // Define jogador como o segundo
@@ -284,7 +284,7 @@ cena1.create = function () {
 
       // Detecção de colisão e disparo de evento: ARCas
       //physics.add.collider(player2, ARCas, hitARCa, null, this);
-     /*
+     
       navigator.mediaDevices
         .getUserMedia({ video: false, audio: true })
         .then((stream) => {
@@ -312,7 +312,7 @@ cena1.create = function () {
               );
             });
         })
-        .catch((error) => console.log(error)); */
+        .catch((error) => console.log(error));
     }
 
     // Os dois jogadores estão conectados
